@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { profile, projects } from '../data/portfolio';
+
+const title = `Work | ${profile.name}`;
+const description = `Selected software engineering projects by ${profile.name}, spanning distributed systems, learning tools, and browser-based media processing.`;
+---
+
+<BaseLayout {title} {description}>
+	<div id="top">
+		<Header />
+		<main id="main-content" class="site-shell">
+			<header class="blog-page-header">
+				<div class="flex items-center justify-between gap-4">
+					<p class="section-kicker">Work / 作品</p>
+					<span class="font-mono text-[0.65rem] text-muted">{String(projects.length).padStart(2, '0')} projects</span>
+				</div>
+				<h1 class="mt-5 text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-none tracking-[-0.055em]">Selected work.</h1>
+				<p class="mt-5 max-w-2xl text-base leading-7 text-muted">Systems and products built around clear constraints, dependable behavior, and focused user experiences.</p>
+			</header>
+
+			<section class="px-5 py-8 sm:px-8 sm:py-10" aria-label="Selected projects">
+				<div class="border-b border-line">
+					{projects.map((project) => <ProjectRow {project} />)}
+				</div>
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import ArrowUpRight from './ArrowUpRight.astro';
+import type { projects } from '../data/portfolio';
+
+type Project = (typeof projects)[number];
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="group border-t border-line transition-colors hover:bg-surface">
+	<a href={project.href} class="grid gap-4 px-1 py-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-punch sm:grid-cols-[2.5rem_minmax(0,1fr)] lg:grid-cols-[2.5rem_minmax(0,1.5fr)_minmax(15rem,0.7fr)] lg:items-center">
+		<span class="font-mono text-[0.65rem] text-muted">{project.index}</span>
+		<div>
+			<h3 class="flex items-center gap-2 text-xl font-semibold tracking-[-0.025em] sm:text-2xl">
+				{project.title}
+				<span class="text-punch transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><ArrowUpRight /></span>
+			</h3>
+			<p class="mt-2 max-w-2xl text-sm leading-6 text-muted sm:text-base">{project.description}</p>
+		</div>
+		<ul class="flex flex-wrap gap-x-5 gap-y-1 pl-[2.5rem] font-mono text-xs text-muted sm:col-start-2 sm:pl-0 lg:col-start-3 lg:justify-end" aria-label="Technologies used">
+			{project.stack.map((technology) => <li>{technology}</li>)}
+		</ul>
+	</a>
+</article>

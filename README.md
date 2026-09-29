@@ -1,43 +1,45 @@
-# Astro Starter Kit: Minimal
+# Saral Gupta | Portfolio
+
+A static Astro portfolio built with Tailwind CSS, local fonts, and Astro content collections.
+
+## Commands
 
 ```sh
-pnpm create astro@latest -- --template minimal
+pnpm install
+pnpm build
+pnpm astro dev --background
+pnpm astro dev status
+pnpm astro dev logs
+pnpm astro dev stop
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Add a blog post
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+Create a Markdown file in `src/content/blog/`. Its filename becomes the URL:
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/content/blog/my-new-post.md → /blog/my-new-post/
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Use this frontmatter:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```md
+---
+title: "Post title"
+description: "A short description for the homepage and SEO."
+pubDate: 2026-09-30
+tags:
+  - Engineering
+  - Systems
+readingTime: "5 min read"
+draft: false
+---
 
-Any static assets, like images, can be placed in the `public/` directory.
+Write the post in Markdown here.
+```
 
-## 🧞 Commands
+Set `draft: true` to keep a post out of the homepage and production routes. The schema lives in `src/content.config.ts`.
 
-All commands are run from the root of the project, from a terminal:
+## Update portfolio content
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Projects, social links, profile information, and the technology list live in `src/data/portfolio.ts`.

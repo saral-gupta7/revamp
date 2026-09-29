@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { profile, socials } from '../data/portfolio';
+
+const title = `Connect | ${profile.name}`;
+const description = `Find ${profile.name} on GitHub, LinkedIn, Twitter, Instagram, Substack, or get in touch by email.`;
+---
+
+<BaseLayout {title} {description}>
+	<div id="top">
+		<Header />
+		<main id="main-content" class="site-shell">
+			<header class="blog-page-header">
+				<p class="section-kicker">Connect / 連絡</p>
+				<h1 class="mt-5 text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-none tracking-[-0.055em]">Say hello.</h1>
+				<p class="mt-5 max-w-xl text-base leading-7 text-muted">Find me elsewhere on the internet, follow what I am learning, or send an email.</p>
+			</header>
+
+			<section class="px-5 py-10 sm:px-8 sm:py-12" aria-label="Social links">
+				<div class="grid grid-cols-1 border-l border-t border-line sm:grid-cols-2 lg:grid-cols-3">
+					{socials.map((social, index) => (
+						<a
+							href={social.href}
+							target={social.href.startsWith('http') ? '_blank' : undefined}
+							rel={social.href.startsWith('http') ? 'noreferrer' : undefined}
+							class="group flex min-h-28 flex-col justify-between border-b border-r border-line p-5 transition-colors hover:bg-ink hover:text-canvas focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-punch"
+						>
+							<span class="flex items-center justify-between gap-4">
+								<span class="font-mono text-[0.62rem] text-muted group-hover:text-canvas">{String(index + 1).padStart(2, '0')}</span>
+								<span class="text-punch transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+							</span>
+							<span class="text-lg font-semibold tracking-[-0.02em]">{social.label}</span>
+						</a>
+					))}
+				</div>
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+</BaseLayout>

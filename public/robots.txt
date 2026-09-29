@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://srlgpta.xyz/sitemap-index.xml

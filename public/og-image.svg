@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#F4F0E7"/>
+  <path d="M0 0h1200v16H0z" fill="#171816"/>
+  <path d="M88 84h56v56H88z" fill="#171816"/>
+  <path d="M101 102h30v8h-22v8h22v8h-30v-24z" fill="#F6C945"/>
+  <circle cx="1032" cy="166" r="126" fill="none" stroke="#F0442F" stroke-width="40"/>
+  <path d="M920 388h330" stroke="#2E62FF" stroke-width="72" transform="rotate(-12 920 388)"/>
+  <text x="88" y="228" fill="#F0442F" font-family="monospace" font-size="20" font-weight="700" letter-spacing="4">SOFTWARE ENGINEER / BUILDER</text>
+  <text x="80" y="366" fill="#171816" font-family="Arial, sans-serif" font-size="104" font-weight="800" letter-spacing="-7">SARAL GUPTA</text>
+  <text x="88" y="444" fill="#686B63" font-family="Arial, sans-serif" font-size="32">Ideas into working software.</text>
+  <path d="M88 510h1024" stroke="#CAC7BC"/>
+  <text x="88" y="556" fill="#171816" font-family="monospace" font-size="18" font-weight="700" letter-spacing="3">SRLGPTA.XYZ</text>
+  <text x="1008" y="556" fill="#171816" font-family="sans-serif" font-size="26" font-weight="700">前進</text>
+</svg>

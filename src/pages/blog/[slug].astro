@@ -1,0 +1,91 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { profile } from '../../data/portfolio';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog', ({ data }) => !data.draft);
+
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const title = `${post.data.title} | ${profile.name}`;
+const description = post.data.description;
+const formatDate = new Intl.DateTimeFormat('en', {
+	day: '2-digit',
+	month: 'long',
+	year: 'numeric',
+});
+const publishedTime = post.data.pubDate.toISOString();
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: post.data.title,
+	description: post.data.description,
+	datePublished: publishedTime,
+	dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+	author: {
+		'@type': 'Person',
+		name: profile.name,
+		url: Astro.site,
+	},
+	mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+};
+---
+
+<BaseLayout {title} {description} ogType="article" {publishedTime} {structuredData}>
+	<div id="top">
+		<Header />
+		<main id="main-content" class="site-shell">
+			<article>
+				<header class="blog-page-header">
+					<a href="/blog/" class="group inline-flex items-center gap-2 font-mono text-[0.68rem] font-medium uppercase tracking-[0.12em] text-muted transition-colors hover:text-ink">
+						<span class="transition-transform duration-200 group-hover:-translate-x-1">←</span> All writing
+					</a>
+					<div class="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-end">
+						<div>
+							<p class="section-kicker">Field note / 記録</p>
+							<h1 class="mt-4 max-w-4xl text-[clamp(2.2rem,5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.055em]">{post.data.title}</h1>
+							<p class="mt-5 max-w-2xl text-base leading-7 text-muted sm:text-lg">{post.data.description}</p>
+						</div>
+						<div class="border-t border-line pt-4 font-mono text-[0.68rem] leading-6 text-muted">
+							<p>{formatDate.format(post.data.pubDate)}</p>
+							<p>{post.data.readingTime}</p>
+							<p class="mt-2 text-ink">{post.data.tags.join(' / ')}</p>
+						</div>
+					</div>
+				</header>
+
+				<div class="grid lg:grid-cols-[1fr_minmax(0,44rem)_1fr]">
+					<div class="hidden border-r border-line lg:block" aria-hidden="true"></div>
+					<div class="px-5 py-12 sm:px-10 sm:py-16">
+						<div class="max-w-none text-[1.02rem] leading-8 text-muted [&_a]:border-b [&_a]:border-punch [&_a]:text-ink [&_a]:transition-colors hover:[&_a]:text-punch [&_code]:bg-mist [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.88em] [&_h2]:mb-4 [&_h2]:mt-12 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-[-0.035em] [&_h2]:text-ink [&_li]:mb-2 [&_p]:mb-6 [&_strong]:font-semibold [&_strong]:text-ink [&_ul]:my-6 [&_ul]:list-disc [&_ul]:pl-6">
+							<Content />
+						</div>
+						<div class="mt-14 border-t border-line pt-6">
+							<a href="/blog/" class="group flex items-center justify-between text-sm font-medium">
+								<span>Back to all writing</span>
+								<span class="font-mono text-punch transition-transform duration-200 group-hover:-translate-x-1">← 記録</span>
+							</a>
+						</div>
+					</div>
+					<div class="hidden border-l border-line lg:block" aria-hidden="true"></div>
+				</div>
+			</article>
+		</main>
+
+		<SiteFooter />
+	</div>
+</BaseLayout>

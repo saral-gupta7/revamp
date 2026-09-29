@@ -1,0 +1,46 @@
+---
+import {
+	siGo,
+	siPostgresql,
+	siPython,
+	siRust,
+	siTypescript,
+	type SimpleIcon,
+} from 'simple-icons';
+import { techStack } from '../data/portfolio';
+
+const icons: Partial<Record<(typeof techStack)[number], SimpleIcon>> = {
+	TypeScript: siTypescript,
+	Go: siGo,
+	PostgreSQL: siPostgresql,
+	Python: siPython,
+	Rust: siRust,
+};
+
+const iconColors: Record<(typeof techStack)[number], string> = {
+	TypeScript: 'text-[#3178C6]',
+	Go: 'text-[#00ADD8]',
+	PostgreSQL: 'text-[#4169E1]',
+	Python: 'text-[#3776AB]',
+	Java: '',
+	Rust: 'text-[#CE422B]',
+};
+---
+
+<div class="grid grid-cols-2 border-l border-t border-line sm:grid-cols-3 lg:grid-cols-6">
+	{techStack.map((technology) => {
+		const icon = icons[technology];
+		return (
+			<div class="group flex min-h-16 items-center gap-3 border-b border-r border-line px-4 transition-colors hover:bg-surface">
+				{technology === 'Java' ? (
+					<img class="size-5 shrink-0" src="/java-original.svg" alt="Java logo" width="20" height="20" loading="lazy" />
+				) : icon ? (
+					<svg class:list={['size-4 shrink-0', iconColors[technology]]} role="img" aria-label={`${technology} logo`} viewBox="0 0 24 24" fill="currentColor">
+						<path d={icon.path} />
+					</svg>
+				) : null}
+				<span class="font-mono text-xs font-medium">{technology}</span>
+			</div>
+		);
+	})}
+</div>

@@ -1,0 +1,49 @@
+---
+import { profile } from '../data/portfolio';
+
+const currentPath = Astro.url.pathname;
+const navItems = [
+	{ label: 'Work', href: '/work/', visibility: 'hidden sm:block' },
+	{ label: 'Blog', href: '/blog/', visibility: 'hidden sm:block' },
+	{ label: 'About', href: '/about/', visibility: 'hidden sm:block' },
+	{ label: 'Connect', href: '/connect/', visibility: 'hidden md:block' },
+] as const;
+
+const isActive = (href: string) => currentPath === href || currentPath.startsWith(href);
+---
+
+<header class="relative z-40 border-b border-line bg-canvas/90 backdrop-blur-md">
+	<div class="mx-auto flex max-w-[1280px] items-center justify-between px-5 py-3 sm:px-8">
+		<a href="/" class="group flex min-h-10 items-center gap-3" aria-label={`${profile.name}, home`}>
+			<span class="font-mono text-xs font-medium tracking-[0.12em] text-punch">サラル</span>
+			<span class="text-sm font-semibold tracking-[-0.015em]">{profile.name}</span>
+		</a>
+
+		<nav class="flex items-center gap-1" aria-label="Primary navigation">
+			{navItems.map((item) => (
+				<a
+					href={item.href}
+					class:list={['header-nav-item', item.visibility, { 'text-ink': isActive(item.href) }]}
+					aria-current={isActive(item.href) ? 'page' : undefined}
+				>
+					{item.label}
+				</a>
+			))}
+			<button
+				type="button"
+				class="group ml-2 grid size-10 place-items-center border border-line bg-surface text-ink transition-colors hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-punch"
+				data-theme-toggle
+				aria-label="Switch color theme"
+				aria-pressed="false"
+			>
+				<svg class="size-4 dark:hidden" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8" />
+					<path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+				</svg>
+				<svg class="hidden size-4 dark:block" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+				</svg>
+			</button>
+		</nav>
+	</div>
+</header>

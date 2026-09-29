@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+	--color-canvas: #f2f0e9;
+	--color-surface: #f8f6f0;
+	--color-ink: #171a17;
+	--color-muted: #6f736b;
+	--color-line: #c9cbc3;
+	--color-punch: #d94b36;
+	--color-sky: #46636d;
+	--color-sun: #d6ad3b;
+	--color-mist: #e6e4dc;
+}
+
+:root.dark {
+	--color-canvas: #101310;
+	--color-surface: #151815;
+	--color-ink: #eeece4;
+	--color-muted: #93978e;
+	--color-line: #30352f;
+	--color-punch: #ec614b;
+	--color-sky: #8da7af;
+	--color-sun: #ddbd5e;
+	--color-mist: #20241f;
+}
+
+@layer components {
+	.header-nav-item {
+		@apply px-3 py-2 text-xs font-medium uppercase tracking-[0.12em] text-muted transition-colors hover:text-ink;
+	}
+
+	.site-shell {
+		@apply mx-auto max-w-[1280px] border-x border-line;
+	}
+
+	.section-kicker {
+		@apply text-[0.65rem] font-medium uppercase tracking-[0.16em] text-punch;
+		font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+	}
+
+	.section-heading {
+		@apply mt-2 text-3xl font-semibold tracking-[-0.045em] sm:text-4xl;
+	}
+
+	.blog-page-header {
+		@apply border-b border-line px-5 py-12 sm:px-8 sm:py-16;
+	}
+
+	.site-footer {
+		@apply mx-auto flex max-w-[1280px] flex-col gap-3 border-x border-t border-line px-5 py-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8;
+	}
+
+	.footer-motto {
+		@apply text-[0.62rem] uppercase tracking-[0.12em];
+		font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+	}
+}

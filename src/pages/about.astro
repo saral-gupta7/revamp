@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import TechStack from '../components/TechStack.astro';
+import { profile } from '../data/portfolio';
+
+const title = `About | ${profile.name}`;
+const description = `About ${profile.name}, a software engineer interested in dependable systems, Linux, cybersecurity, languages, music, and anime.`;
+---
+
+<BaseLayout {title} {description}>
+	<div id="top">
+		<Header />
+		<main id="main-content" class="site-shell">
+			<header class="blog-page-header">
+				<p class="section-kicker">About / 自己紹介</p>
+				<h1 class="mt-5 max-w-4xl text-[clamp(2.2rem,5vw,4.25rem)] font-semibold leading-[1.04] tracking-[-0.055em]">Curious about systems, interfaces, and everything between.</h1>
+				<p class="mt-5 max-w-2xl text-base leading-7 text-muted">{profile.intro}</p>
+			</header>
+
+			<section class="grid lg:grid-cols-2" aria-label="About Saral Gupta">
+				<div class="border-b border-line px-5 py-12 sm:px-8 lg:border-b-0 lg:border-r">
+					<p class="section-kicker">How I work / 作り方</p>
+					<h2 class="section-heading">Clear over clever.</h2>
+					<div class="mt-6 space-y-4 text-sm leading-7 text-muted">
+						<p>I care about software that is dependable, understandable, and respectful of people’s time.</p>
+						<p>I work across the stack and choose tools around the problem. Good constraints matter more to me than technology loyalty.</p>
+					</div>
+				</div>
+
+				<div class="px-5 py-12 sm:px-8">
+					<p class="section-kicker">Beyond code / 日常</p>
+					<h2 class="section-heading">Always learning something.</h2>
+					<div class="mt-6 space-y-4 text-sm leading-7 text-muted">
+						<p>I learn languages, play guitar and keyboard, and occasionally collect another musical instrument.</p>
+						<p>I also watch anime and enjoy Japanese design, especially stories about adventure, teamwork, and getting better one step at a time.</p>
+					</div>
+					<p class="mt-7 font-mono text-xs text-muted">Hunter × Hunter · One Piece · Haikyuu!!</p>
+				</div>
+			</section>
+
+			<section class="border-t border-line px-5 py-10 sm:px-8" aria-labelledby="about-stack-heading">
+				<div class="mb-4 flex flex-wrap items-end justify-between gap-4">
+					<div>
+						<p class="section-kicker">Working set / 道具</p>
+						<h2 id="about-stack-heading" class="mt-2 text-xl font-semibold tracking-[-0.03em]">Tools I reach for</h2>
+					</div>
+					<p class="font-mono text-[0.65rem] text-muted">Tools change. Fundamentals travel.</p>
+				</div>
+				<TechStack />
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+</BaseLayout>
