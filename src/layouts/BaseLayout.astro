@@ -1,6 +1,7 @@
 ---
 import '@fontsource-variable/manrope';
 import '@fontsource-variable/jetbrains-mono';
+import Analytics from '@vercel/analytics/astro';
 import '../styles/global.css';
 import { profile } from '../data/portfolio';
 
@@ -90,5 +91,6 @@ const structuredDataGraph = pageStructuredData
 
 			updateThemeLabel();
 		</script>
+		<Analytics />
 	</body>
 </html>
