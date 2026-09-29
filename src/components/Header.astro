@@ -3,35 +3,38 @@ import { profile } from '../data/portfolio';
 
 const currentPath = Astro.url.pathname;
 const navItems = [
-	{ label: 'Work', href: '/work/', visibility: 'hidden sm:block' },
-	{ label: 'Blog', href: '/blog/', visibility: 'hidden sm:block' },
-	{ label: 'About', href: '/about/', visibility: 'hidden sm:block' },
-	{ label: 'Connect', href: '/connect/', visibility: 'hidden md:block' },
+	{ label: 'Work', japaneseLabel: '作品', href: '/work/' },
+	{ label: 'Blog', japaneseLabel: '記録', href: '/blog/' },
+	{ label: 'About', japaneseLabel: '自己紹介', href: '/about/' },
+	{ label: 'Connect', japaneseLabel: '連絡', href: '/connect/' },
 ] as const;
+const mobileItemDelays = ['delay-75', 'delay-100', 'delay-150', 'delay-200'] as const;
 
 const isActive = (href: string) => currentPath === href || currentPath.startsWith(href);
 ---
 
-<header class="relative z-40 border-b border-line bg-canvas/90 backdrop-blur-md">
+<header class="relative z-40 border-b border-line bg-canvas/90 backdrop-blur-md" data-site-header>
 	<div class="mx-auto flex max-w-[1280px] items-center justify-between px-5 py-3 sm:px-8">
 		<a href="/" class="group flex min-h-10 items-center gap-3" aria-label={`${profile.name}, home`}>
 			<span class="font-mono text-xs font-medium tracking-[0.12em] text-punch">サラル</span>
 			<span class="text-sm font-semibold tracking-[-0.015em]">{profile.name}</span>
 		</a>
 
-		<nav class="flex items-center gap-1" aria-label="Primary navigation">
-			{navItems.map((item) => (
-				<a
-					href={item.href}
-					class:list={['header-nav-item', item.visibility, { 'text-ink': isActive(item.href) }]}
-					aria-current={isActive(item.href) ? 'page' : undefined}
-				>
-					{item.label}
-				</a>
-			))}
+		<div class="flex items-center gap-1">
+			<nav class="hidden items-center gap-1 sm:flex" aria-label="Primary navigation">
+				{navItems.map((item) => (
+					<a
+						href={item.href}
+						class:list={['header-nav-item', { 'text-ink': isActive(item.href) }]}
+						aria-current={isActive(item.href) ? 'page' : undefined}
+					>
+						{item.label}
+					</a>
+				))}
+			</nav>
 			<button
 				type="button"
-				class="group ml-2 grid size-10 place-items-center border border-line bg-surface text-ink transition-colors hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-punch"
+				class="group ml-1 grid size-10 place-items-center border border-line bg-surface text-ink transition-colors hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-punch sm:ml-2"
 				data-theme-toggle
 				aria-label="Switch color theme"
 				aria-pressed="false"
@@ -44,6 +47,125 @@ const isActive = (href: string) => currentPath === href || currentPath.startsWit
 					<path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
 				</svg>
 			</button>
-		</nav>
+			<button
+				type="button"
+				class="grid size-10 place-items-center border border-line bg-surface text-ink transition-colors hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-punch sm:hidden"
+				data-mobile-menu-toggle
+				aria-controls="mobile-navigation"
+				aria-expanded="false"
+				aria-label="Open navigation"
+			>
+				<svg class="size-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+				</svg>
+			</button>
+		</div>
 	</div>
+
+	<nav
+		id="mobile-navigation"
+		class="pointer-events-none fixed inset-0 z-50 min-h-svh overflow-y-auto bg-canvas opacity-0 transition-opacity duration-300 ease-out motion-reduce:transition-none sm:hidden"
+		data-mobile-menu
+		aria-label="Mobile navigation"
+		aria-hidden="true"
+		inert
+	>
+		<div class="flex min-h-svh translate-y-3 flex-col transition-transform duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-none" data-mobile-menu-panel>
+			<div class="flex items-center justify-between border-b border-line px-5 py-3">
+				<a href="/" class="flex min-h-10 items-center gap-3" aria-label={`${profile.name}, home`}>
+					<span class="font-mono text-xs font-medium tracking-[0.12em] text-punch">サラル</span>
+					<span class="text-sm font-semibold tracking-[-0.015em]">{profile.name}</span>
+				</a>
+				<button
+					type="button"
+					class="grid size-10 place-items-center border border-line bg-surface text-ink transition-colors hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-punch"
+					data-mobile-menu-close
+					aria-label="Close navigation"
+				>
+					<svg class="size-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+					</svg>
+				</button>
+			</div>
+
+			<div class="flex flex-1 flex-col justify-center px-5 py-8">
+				{navItems.map((item, index) => (
+					<a
+						href={item.href}
+						class:list={[
+							'group grid translate-y-4 grid-cols-[2rem_minmax(0,1fr)_auto] items-center gap-3 border-t border-line py-5 opacity-0 transition-all duration-300 ease-out last:border-b motion-reduce:transform-none motion-reduce:transition-none',
+							mobileItemDelays[index],
+							{ 'text-punch': isActive(item.href) },
+						]}
+						data-mobile-menu-item
+						aria-current={isActive(item.href) ? 'page' : undefined}
+					>
+						<span class="font-mono text-[0.62rem] text-muted">{String(index + 1).padStart(2, '0')}</span>
+						<span class="text-[clamp(2rem,11vw,3.5rem)] font-semibold leading-none tracking-[-0.05em] transition-transform duration-200 group-hover:translate-x-1">{item.label}</span>
+						<span class="font-mono text-[0.65rem] text-muted group-hover:text-punch">{item.japaneseLabel}</span>
+					</a>
+				))}
+			</div>
+
+			<div class="flex items-center justify-between border-t border-line px-5 py-5 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-muted">
+				<span>Navigation / 案内</span>
+				<span>Fly high / 高く飛べ</span>
+			</div>
+		</div>
+	</nav>
 </header>
+
+<script>
+	const siteHeader = document.querySelector<HTMLElement>('[data-site-header]');
+	const menuToggle = siteHeader?.querySelector<HTMLButtonElement>('[data-mobile-menu-toggle]');
+	const mobileMenu = siteHeader?.querySelector<HTMLElement>('[data-mobile-menu]');
+	const menuClose = mobileMenu?.querySelector<HTMLButtonElement>('[data-mobile-menu-close]');
+	const menuPanel = mobileMenu?.querySelector<HTMLElement>('[data-mobile-menu-panel]');
+	const menuItems = mobileMenu?.querySelectorAll<HTMLElement>('[data-mobile-menu-item]');
+
+	const setMenuOpen = (isOpen: boolean, restoreFocus = false) => {
+		if (!menuToggle || !mobileMenu) return;
+		menuToggle.setAttribute('aria-expanded', String(isOpen));
+		mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+		mobileMenu.toggleAttribute('inert', !isOpen);
+		mobileMenu.classList.toggle('pointer-events-none', !isOpen);
+		mobileMenu.classList.toggle('pointer-events-auto', isOpen);
+		mobileMenu.classList.toggle('opacity-0', !isOpen);
+		mobileMenu.classList.toggle('opacity-100', isOpen);
+		menuPanel?.classList.toggle('translate-y-3', !isOpen);
+		menuPanel?.classList.toggle('translate-y-0', isOpen);
+		menuItems?.forEach((item) => {
+			item.classList.toggle('translate-y-4', !isOpen);
+			item.classList.toggle('translate-y-0', isOpen);
+			item.classList.toggle('opacity-0', !isOpen);
+			item.classList.toggle('opacity-100', isOpen);
+		});
+		document.body.classList.toggle('overflow-hidden', isOpen);
+
+		if (isOpen) {
+			requestAnimationFrame(() => menuClose?.focus());
+		} else if (restoreFocus) {
+			menuToggle.focus();
+		}
+	};
+
+	menuToggle?.addEventListener('click', () => {
+		setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+	});
+
+	menuClose?.addEventListener('click', () => setMenuOpen(false, true));
+
+	mobileMenu?.querySelectorAll('a').forEach((link) => {
+		link.addEventListener('click', () => setMenuOpen(false));
+	});
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape' && menuToggle?.getAttribute('aria-expanded') === 'true') {
+			setMenuOpen(false, true);
+		}
+	});
+
+	window.matchMedia('(min-width: 640px)').addEventListener('change', (event) => {
+		if (event.matches) setMenuOpen(false);
+	});
+</script>
