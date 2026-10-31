@@ -38,15 +38,15 @@ export const projects = [
 export const socials = [
   {
     label: "GitHub",
-    handle: "@github",
+    handle: "@saral-gupta7",
     href: "https://github.com/saral-gupta7",
   },
   {
     label: "LinkedIn",
-    handle: "/in/linkedin",
+    handle: "/in/saralgupta7",
     href: "https://www.linkedin.com/in/saralgupta7",
   },
-  { label: "Twitter / X", handle: "@twitter", href: "https://x.com/srlgpt_a" },
+  { label: "Twitter / X", handle: "@srlgpt_a", href: "https://x.com/srlgpt_a" },
   {
     label: "Instagram",
     handle: "@languages",
