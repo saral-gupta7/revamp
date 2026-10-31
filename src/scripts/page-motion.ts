@@ -7,7 +7,7 @@ const pageTargets = (root: Document = document) =>
     .map((selector) => root.querySelector<HTMLElement>(selector))
     .filter((element): element is HTMLElement => Boolean(element));
 const rowTargets = (root: Document = document) =>
-  Array.from(root.querySelectorAll<HTMLElement>('.project-row, .writing-list article, .contact-list a'));
+  Array.from(root.querySelectorAll<HTMLElement>('.project-row, .writing-list article, .contact-list a, .setup-app-grid a, .setup-tool-grid a'));
 
 const reset = (elements: HTMLElement[]) => {
   for (const element of elements) {

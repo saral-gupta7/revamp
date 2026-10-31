@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { profile } from '../data/portfolio';
+import { software, terminalTools } from '../data/setup';
+
+const title = 'My setup — ' + profile.name;
+const description = 'The software and terminal tools ' + profile.name + ' uses every day.';
+---
+<BaseLayout {title} {description}>
+  <Header />
+  <main id="main-content" class="page-width inner-main setup-main">
+    <p class="eyebrow">Setup</p>
+    <h1>My setup.</h1>
+    <p class="page-lead">The tools I reach for, from the editor to the command line.</p>
+
+    <section class="setup-page-section" aria-labelledby="software-heading">
+      <div class="setup-section-heading">
+        <h2 id="software-heading">Software</h2>
+        <span>{software.length} apps</span>
+      </div>
+      <ul class="setup-app-grid">
+        {software.map(({ name, role, icon, href }) => (
+          <li>
+            <a class="setup-app" href={href} target="_blank" rel="noopener noreferrer" aria-label={`${name}, ${role} (opens in a new tab)`}>
+              <img src={icon} alt="" width="42" height="42" loading="lazy" />
+              <span class="setup-app-copy">
+                <strong>{name}</strong>
+                <span>{role}</span>
+              </span>
+              <span class="setup-app-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="setup-page-section setup-terminal-section" aria-labelledby="terminal-heading">
+      <div class="setup-section-heading">
+        <h2 id="terminal-heading">In the terminal</h2>
+        <span>{terminalTools.length} tools</span>
+      </div>
+      <ul class="setup-tool-grid">
+        {terminalTools.map(({ name, role, href }) => (
+          <li>
+            <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${name}, ${role} (opens in a new tab)`}>
+              <span class="setup-tool-prompt" aria-hidden="true">›</span>
+              <span class="setup-tool-copy"><strong>{name}</strong><span>{role}</span></span>
+              <span class="setup-tool-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>
