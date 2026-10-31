@@ -42,13 +42,13 @@ const enterPage = async () => {
   const entrance = animate(
     page,
     { opacity: [0, 1], y: [12, 0] },
-    { duration: 0.55, delay: stagger(0.065), ease: [0.22, 1, 0.36, 1] },
+    { duration: 0.46, delay: stagger(0.05), ease: [0.22, 1, 0.36, 1] },
   );
   const rowEntrance = rows.length
     ? animate(
         rows,
         { opacity: [0, 1], y: [7, 0] },
-        { duration: 0.42, delay: stagger(0.05, { startDelay: 0.22 }), ease: [0.22, 1, 0.36, 1] },
+        { duration: 0.34, delay: stagger(0.04, { startDelay: 0.18 }), ease: [0.22, 1, 0.36, 1] },
       )
     : null;
 
@@ -68,7 +68,7 @@ const exitPage = async () => {
   const exit = animate(
     page,
     { opacity: 0, y: -8 },
-    { duration: 0.26, delay: stagger(0.035, { from: 'last' }), ease: [0.4, 0, 1, 1] },
+    { duration: 0.21, delay: stagger(0.025, { from: 'last' }), ease: [0.4, 0, 1, 1] },
   );
   await exit.finished.catch(() => {});
 };
