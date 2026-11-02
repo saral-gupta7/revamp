@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ProjectRow from '../components/ProjectRow.astro';
+import ShinkansenRoute from '../components/ShinkansenRoute.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { profile, projects } from '../data/portfolio';
 const title = profile.name + ' — Software engineer';
@@ -26,6 +27,7 @@ const description = profile.name + ' is a software engineer building dependable 
       <div class="section-topline"><h2 id="work-title">Selected work</h2><a href="/work/">All work <span aria-hidden="true">↗</span></a></div>
       <div class="project-list">{projects.map((project) => <ProjectRow {project} />)}</div>
     </section>
+    <ShinkansenRoute />
   </main>
   <SiteFooter />
 </BaseLayout>
