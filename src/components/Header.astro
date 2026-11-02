@@ -1,6 +1,6 @@
 ---
 import { profile } from '../data/portfolio';
-import Daruma from './Daruma.astro';
+import AsciiMotif from './AsciiMotif.astro';
 const currentPath = Astro.url.pathname;
 const navItems = [
   { number: '01', label: 'Work', href: '/work/' },
@@ -22,5 +22,5 @@ const navItems = [
       </a>
     ))}
   </nav>
-  <Daruma />
+  <AsciiMotif variant="pine" class="nav-ascii" />
 </aside>

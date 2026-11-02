@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import AsciiMotif from '../components/AsciiMotif.astro';
 import { profile } from '../data/portfolio';
 import { software, terminalTools } from '../data/setup';
 
@@ -14,6 +15,7 @@ const description = 'The software and terminal tools ' + profile.name + ' uses e
     <p class="eyebrow">Setup</p>
     <h1>My setup.</h1>
     <p class="page-lead">The tools I reach for, from the editor to the command line.</p>
+    <AsciiMotif variant="terminal" class="page-ascii" />
 
     <section class="setup-page-section" aria-labelledby="software-heading">
       <div class="setup-section-heading">

@@ -73,30 +73,6 @@ const exitPage = async () => {
   await exit.finished.catch(() => {});
 };
 
-let blinkAnimation: { stop: () => void } | undefined;
-const setupMascot = () => {
-  blinkAnimation?.stop();
-  blinkAnimation = undefined;
-  if (!motionAllowed()) return;
-
-  const mascot = document.querySelector<HTMLElement>('.margin-mascot');
-  const illustration = mascot?.querySelector<SVGElement>('svg');
-  const eyes = mascot?.querySelector<SVGGElement>('.mascot-eyes');
-  if (!mascot || !illustration || !eyes) return;
-
-  blinkAnimation = animate(
-    eyes,
-    { scaleY: [1, 0.08, 1] },
-    { duration: 0.18, delay: 3.4, repeat: Infinity, repeatDelay: 4.8, ease: 'easeInOut' },
-  );
-  mascot.addEventListener('pointerenter', () => {
-    animate(illustration, { rotate: -7, y: -3 }, { type: 'spring', stiffness: 280, damping: 17 });
-  });
-  mascot.addEventListener('pointerleave', () => {
-    animate(illustration, { rotate: 0, y: 0 }, { type: 'spring', stiffness: 260, damping: 18 });
-  });
-};
-
 document.addEventListener('astro:before-preparation', (event) => {
   isLeaving = true;
   const preparation = event as Event & { loader: () => Promise<void> };
@@ -114,7 +90,6 @@ document.addEventListener('astro:before-preparation', (event) => {
 });
 
 document.addEventListener('astro:before-swap', (event) => {
-  blinkAnimation?.stop();
   const swap = event as Event & { newDocument: Document };
   if (motionAllowed()) prepare(swap.newDocument);
 });
@@ -122,12 +97,10 @@ document.addEventListener('astro:before-swap', (event) => {
 document.addEventListener('astro:after-swap', () => {
   isLeaving = false;
   void enterPage();
-  setupMascot();
 });
 
 const start = () => {
   void enterPage();
-  setupMascot();
 };
 
 if (document.readyState === 'loading') {

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import AsciiMotif from '../components/AsciiMotif.astro';
 import { profile } from '../data/portfolio';
 const title = 'Contact — ' + profile.name;
 const description = 'Get in touch with ' + profile.name + ' by email or social profiles.';
@@ -12,6 +13,7 @@ const description = 'Get in touch with ' + profile.name + ' by email or social p
     <p class="eyebrow">Contact</p>
     <h1>Let’s talk.</h1>
     <p class="page-lead">The easiest way to reach me is by email. I’m also around on these platforms.</p>
+    <AsciiMotif variant="letter" class="page-ascii" />
     <div class="contact-list">
       <a href={'mailto:' + profile.email}><span>Email</span><span>{profile.email} ↗</span></a>
       <a href="https://github.com/saral-gupta7" target="_blank" rel="noreferrer"><span>GitHub</span><span>saral-gupta7 ↗</span></a>

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import AsciiMotif from '../components/AsciiMotif.astro';
 import { siGo, siTypescript, siRust } from 'simple-icons';
 import { profile } from '../data/portfolio';
 const title = 'About — ' + profile.name;
@@ -18,6 +19,7 @@ const tools = [
     <p class="eyebrow">About</p>
     <h1>Curious about how things work.</h1>
     <p class="page-lead">I’m Saral, a software engineer interested in dependable systems and thoughtful products.</p>
+    <AsciiMotif variant="notes" class="page-ascii" />
     <div class="prose-block">
       <p>I work across the stack, from infrastructure and backend design to the details that make a product easier to use. I care about software that is clear, reliable, and respectful of people’s time.</p>
       <p class="about-tools-label">I work with</p>

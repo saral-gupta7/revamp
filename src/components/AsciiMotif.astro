@@ -1,0 +1,20 @@
+---
+const motifs = {
+  stars: '   .      *\n .    .  +\n    *    .',
+  pine: '    ^\n   /|\\\n  //|\\\\\n    |',
+  nodes: 'o---o\n \\ / \n  o---o',
+  notes: '  __  __\n  | | | |\n  o   o',
+  book: '  __/\\__\n /  /\\  \\\n/__/  \\__\\',
+  terminal: '  .----.\n  | >_ |\n  `----`',
+  letter: '  .-----.\n  |\\   /|\n  `-----`',
+  waves: '~  ~  ~~\n  ~  ~  ~',
+} as const;
+
+interface Props {
+  variant: keyof typeof motifs;
+  class?: string;
+}
+
+const { variant, class: className } = Astro.props;
+---
+<pre class:list={['ascii-motif', className]} data-variant={variant} aria-hidden="true">{motifs[variant]}</pre>

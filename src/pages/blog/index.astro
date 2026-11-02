@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
+import AsciiMotif from '../../components/AsciiMotif.astro';
 import { profile } from '../../data/portfolio';
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const title = 'Writing — ' + profile.name;
@@ -15,6 +16,7 @@ const formatDate = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeri
     <p class="eyebrow">Writing</p>
     <h1>Notes from the workbench.</h1>
     <p class="page-lead">Things I learned while building, breaking, and figuring things out.</p>
+    <AsciiMotif variant="book" class="page-ascii" />
     <div class="writing-list">
       {posts.map((post) => (
         <article>

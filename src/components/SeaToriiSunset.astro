@@ -1,0 +1,61 @@
+<figure class="torii-feature" aria-labelledby="torii-caption">
+  <div class="torii-scene">
+    <ascii-art piece="sea-torii-sunset" size="5.5" aria-hidden="true"></ascii-art>
+  </div>
+  <figcaption id="torii-caption" class="torii-caption">
+    <span>Sea Torii Sunset</span>
+    <span>Animated ASCII by ASCII Magic</span>
+  </figcaption>
+</figure>
+
+<script is:inline type="module" src="https://www.ascii-magic.com/ascii/ascii.js"></script>
+
+<script>
+  let observer: ResizeObserver | undefined;
+
+  const fitArt = () => {
+    observer?.disconnect();
+    const scene = document.querySelector<HTMLElement>('.torii-scene');
+    const art = scene?.querySelector('ascii-art');
+    if (!scene || !art) return;
+
+    const resize = () => {
+      // ASCII Magic uses 192 square cells, each 0.602 × the size attribute.
+      const size = (scene.clientWidth / (192 * 0.602)).toFixed(2);
+      if (art.getAttribute('size') !== size) art.setAttribute('size', size);
+    };
+    observer = new ResizeObserver(resize);
+    observer.observe(scene);
+    resize();
+  };
+
+  document.addEventListener('astro:page-load', fitArt);
+  document.addEventListener('astro:before-swap', () => observer?.disconnect());
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fitArt, { once: true });
+  else fitArt();
+</script>
+
+<style>
+  .torii-feature { margin: 42px 0 0; }
+  .torii-scene {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  }
+  ascii-art { display: block; width: 100%; }
+  .torii-caption {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 12px;
+    color: #8b8b85;
+    font-family: var(--font-mono);
+    font-size: 10px;
+  }
+  .torii-caption span:last-child { color: #696965; }
+  @media (max-width: 520px) {
+    .torii-feature { margin-top: 26px; }
+    .torii-caption { flex-wrap: wrap; font-size: 9px; }
+  }
+</style>

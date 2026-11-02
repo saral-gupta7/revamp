@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
+import AsciiMotif from '../../components/AsciiMotif.astro';
 import { profile } from '../../data/portfolio';
 interface Props { post: CollectionEntry<'blog'> }
 export async function getStaticPaths() {
@@ -30,6 +31,7 @@ const structuredData = {
 <BaseLayout {title} {description} ogType="article" {publishedTime} {structuredData}>
   <Header />
   <main id="main-content" class="page-width article-main">
+    <AsciiMotif variant="book" class="page-ascii" />
     <a class="back-link" href="/blog/">← All writing</a>
     <article>
       <header class="article-header">

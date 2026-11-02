@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ProjectRow from '../components/ProjectRow.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import AsciiMotif from '../components/AsciiMotif.astro';
 import { profile, projects } from '../data/portfolio';
 const title = 'Work — ' + profile.name;
 const description = 'Selected software engineering projects by ' + profile.name + '.';
@@ -13,6 +14,7 @@ const description = 'Selected software engineering projects by ' + profile.name 
     <p class="eyebrow">Work</p>
     <h1>Selected work.</h1>
     <p class="page-lead">Systems and products built around useful ideas and clear constraints.</p>
+    <AsciiMotif variant="nodes" class="page-ascii" />
     <div class="project-list page-projects">{projects.map((project) => <ProjectRow {project} />)}</div>
     <p class="page-end-note">More on <a href="https://github.com/saral-gupta7" target="_blank" rel="noreferrer">GitHub ↗</a></p>
   </main>
