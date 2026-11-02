@@ -3,6 +3,7 @@
 @theme {
   --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  --font-pixel: "Pixelify Sans Variable", ui-monospace, monospace;
   --color-canvas: #080809;
   --color-surface: #111113;
   --color-ink: #ecebe6;
@@ -160,6 +161,48 @@ body > .site-footer { grid-column: 1; grid-row: 2; }
 .article-content pre code { padding: 0; background: transparent; }
 .article-content strong { color: var(--color-ink); }
 .article-bottom-link { display: inline-block; margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--color-line); width: 100%; }
+
+/* Crossfade two text layers because font-family itself cannot interpolate. */
+#main-content .pixel-heading { position: relative; }
+#main-content .pixel-heading > .heading-base,
+#main-content .pixel-heading > .heading-pixel {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+#main-content .pixel-heading > .heading-base {
+  color: inherit;
+  opacity: 1;
+  transition: opacity .22s ease;
+}
+#main-content .pixel-heading > .heading-pixel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: max-content;
+  max-width: min(calc(100% + 5ch), 640px, calc(100vw - 36px));
+  font-family: var(--font-pixel);
+  letter-spacing: 0;
+  color: transparent;
+  background-image: linear-gradient(95deg, #f08b7b, #e8af70 26%, #be92d1 52%, #84b3d9 76%, #89c5ad);
+  background-clip: text;
+  -webkit-background-clip: text;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(2px);
+  transition: opacity .22s ease, transform .22s ease;
+}
+#main-content .pixel-heading:is(:hover, :focus-within) > .heading-base { opacity: 0; }
+#main-content .pixel-heading:is(:hover, :focus-within) > .heading-pixel {
+  opacity: 1;
+  transform: translateY(0);
+}
+#main-content .pixel-heading:focus-within { outline: 1px solid var(--color-hover); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  #main-content .pixel-heading > .heading-pixel { transform: none; }
+}
 
 html.motion-pending .site-header,
 html.motion-pending #main-content,
