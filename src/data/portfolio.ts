@@ -33,6 +33,13 @@ export const projects = [
     stack: ["Go", "Next.js", "FFmpeg"],
     href: "https://recode.srlgpta.xyz",
   },
+  {
+    index: "04",
+    title: "opencabinet",
+    description: "A curated library of resources, channels, videos and more.",
+    stack: ["React", "TanStack Start", "Neon"],
+    href: "https://opencabinet.space",
+  },
 ] as const;
 
 export const socials = [
