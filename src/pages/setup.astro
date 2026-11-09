@@ -2,20 +2,20 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import AsciiMotif from '../components/AsciiMotif.astro';
 import { profile } from '../data/portfolio';
 import { software, terminalTools } from '../data/setup';
 
 const title = 'My setup — ' + profile.name;
-const description = 'The software and terminal tools ' + profile.name + ' uses every day.';
+const description = 'The software and terminal tools in ' + profile.name + '\'s setup.';
 ---
 <BaseLayout {title} {description}>
   <Header />
   <main id="main-content" class="page-width inner-main setup-main">
-    <p class="eyebrow">Setup</p>
-    <h1>My <span class="heading-accent">setup.</span></h1>
-    <p class="page-lead">The tools I reach for, from the editor to the command line.</p>
-    <AsciiMotif variant="terminal" class="page-ascii" />
+    <header class="page-intro" data-glyph="道">
+      <p class="eyebrow">道具 / SETUP</p>
+      <h1>My <span class="heading-accent">setup.</span></h1>
+      <p class="page-lead">A practical collection of tools for building, thinking, and everyday work.</p>
+    </header>
 
     <section class="setup-page-section" aria-labelledby="software-heading">
       <div class="setup-section-heading">

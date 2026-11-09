@@ -1,7 +1,6 @@
 ---
 import { profile, socials } from '../data/portfolio';
 import { siGithub, siX, siInstagram, siSubstack } from 'simple-icons';
-import AsciiMotif from './AsciiMotif.astro';
 
 const icons: Record<string, string> = {
   GitHub: siGithub.path,
@@ -13,7 +12,6 @@ const icons: Record<string, string> = {
 const socialLinks = socials.filter((social) => social.label in icons);
 ---
 <footer class="page-width site-footer">
-  <AsciiMotif variant="waves" class="footer-ascii" />
   <nav aria-label="Contact and social links" class="footer-socials">
     <a class="footer-email" href={`mailto:${profile.email}`}>{profile.email}</a>
     {socialLinks.map((social) => (

@@ -6,18 +6,19 @@ import WorkCard from '../components/WorkCard.astro';
 import { profile, projects } from '../data/portfolio';
 const title = 'Work — ' + profile.name;
 const description = 'A closer look at the systems, learning tools and creative software built by ' + profile.name + '.';
+const workProjects = [projects[3], projects[0], projects[2], projects[1]];
 ---
 <BaseLayout {title} {description}>
   <Header />
   <main id="main-content" class="page-width inner-main work-main">
     <header class="work-intro">
-      <div class="work-intro-top"><p class="eyebrow">作品集 / WORK ARCHIVE</p><span>01 — 04 / 2026</span></div>
+      <div class="work-intro-top"><p class="eyebrow">作品集 / WORK ARCHIVE</p><span>SG / 2026</span></div>
       <h1>Things made <em>with intent.</em></h1>
-      <p class="page-lead">Four explorations in dependable infrastructure, active learning, media tools and the open web. Each began with a small frustration and became something you can use.</p>
+      <p class="page-lead">I turn persistent questions into things people can use.</p>
       <div class="work-intro-rule"><span>SCROLL TO EXPLORE</span><span aria-hidden="true">↓</span></div>
     </header>
     <section class="work-gallery" aria-label="Projects">
-      {projects.map((project, index) => <WorkCard {project} {index} />)}
+      {workProjects.map((project, index) => <WorkCard {project} {index} />)}
     </section>
     <div class="work-outro"><span>以上 / THAT'S ALL FOR NOW</span><a href="https://github.com/saral-gupta7" target="_blank" rel="noreferrer">More experiments on GitHub ↗</a></div>
   </main>

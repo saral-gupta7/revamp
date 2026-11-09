@@ -2,18 +2,18 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import AsciiMotif from '../components/AsciiMotif.astro';
 import { profile } from '../data/portfolio';
 const title = 'Contact — ' + profile.name;
 const description = 'Get in touch with ' + profile.name + ' by email or social profiles.';
 ---
 <BaseLayout {title} {description}>
   <Header />
-  <main id="main-content" class="page-width inner-main">
-    <p class="eyebrow">Contact</p>
-    <h1>Let’s <span class="heading-accent">talk.</span></h1>
-    <p class="page-lead">The easiest way to reach me is by email. I’m also around on these platforms.</p>
-    <AsciiMotif variant="letter" class="page-ascii" />
+  <main id="main-content" class="page-width inner-main contact-main">
+    <header class="page-intro" data-glyph="縁">
+      <p class="eyebrow">連絡 / CONTACT</p>
+      <h1>Let’s <span class="heading-accent">talk.</span></h1>
+      <p class="page-lead">The easiest way to reach me is by email. I’m also around on these platforms.</p>
+    </header>
     <div class="contact-list">
       <a href={'mailto:' + profile.email}><span>Email</span><span>{profile.email} ↗</span></a>
       <a href="https://github.com/saral-gupta7" target="_blank" rel="noreferrer"><span>GitHub</span><span>saral-gupta7 ↗</span></a>

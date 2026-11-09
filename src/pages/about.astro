@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import AsciiMotif from '../components/AsciiMotif.astro';
 import { siGo, siTypescript, siRust } from 'simple-icons';
 import { profile } from '../data/portfolio';
 const title = 'About — ' + profile.name;
@@ -15,11 +14,12 @@ const tools = [
 ---
 <BaseLayout {title} {description}>
   <Header />
-  <main id="main-content" class="page-width inner-main">
-    <p class="eyebrow">About</p>
-    <h1>Curious about <span class="heading-accent">how things work.</span></h1>
-    <p class="page-lead">I’m Saral, a software engineer interested in dependable systems and thoughtful products.</p>
-    <AsciiMotif variant="notes" class="page-ascii" />
+  <main id="main-content" class="page-width inner-main about-main">
+    <header class="page-intro" data-glyph="人">
+      <p class="eyebrow">人物 / ABOUT</p>
+      <h1>Curious about <span class="heading-accent">how things work.</span></h1>
+      <p class="page-lead">I’m Saral, a software engineer interested in dependable systems and thoughtful products.</p>
+    </header>
     <div class="prose-block">
       <p>I work across the stack, from infrastructure and backend design to the details that make a product easier to use. I care about software that is clear, reliable, and respectful of people’s time.</p>
       <p class="about-tools-label">I work with</p>
@@ -33,6 +33,21 @@ const tools = [
       </ul>
       <p>Outside code, I’m learning Spanish and Japanese, with a little Mandarin. I play guitar, piano, and ukulele, and enjoy Japanese culture.</p>
     </div>
+    <section class="education-section" aria-labelledby="education-heading">
+      <div class="section-topline">
+        <h2 id="education-heading">Education<span class="heading-accent">.</span></h2>
+        <span class="education-kicker">学び / EDUCATION</span>
+      </div>
+      <div class="education-card">
+        <span class="education-mark" aria-hidden="true">01<br />学</span>
+        <div class="education-detail">
+          <p class="education-years">2023 — 2027</p>
+          <h3>Indian Institute of Engineering Science and Technology, Shibpur</h3>
+          <p>Electrical Engineering</p>
+        </div>
+        <a href="https://in.linkedin.com/in/saralgupta7" target="_blank" rel="noopener noreferrer" aria-label="View education on LinkedIn (opens in a new tab)">↗</a>
+      </div>
+    </section>
     <div class="simple-link-row"><a href="/work/">See my work ↗</a><a href="/setup/">My setup ↗</a><a href={'mailto:' + profile.email}>Get in touch ↗</a></div>
   </main>
   <SiteFooter />
