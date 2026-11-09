@@ -1,0 +1,34 @@
+---
+import type { projects } from '../data/portfolio';
+type Project = (typeof projects)[number];
+interface Props { project: Project; index: number }
+const { project, index } = Astro.props;
+const details = [
+  { category: 'DISTRIBUTED SYSTEMS', kana: '行列', line: 'Work should survive the unexpected.', body: 'A task queue designed around the moments when workers fail: leases, retries and durable state keep jobs moving without pretending the network is perfect.', visual: 'queue', note: 'LEASE → WORK → RETRY' },
+  { category: 'LEARNING EXPERIENCE', kana: '探求', line: 'Follow a question further.', body: 'A focused space for learning through exploration. Coordinate brings an agentic guide and a clear interface together so curiosity can turn into a path forward.', visual: 'orbit', note: 'QUESTION → EXPLORE → LEARN' },
+  { category: 'MEDIA TOOLING', kana: '変換', line: 'Make the useful edit, then move on.', body: 'Image and video processing without an account or a long setup. Recode keeps the workflow direct, putting powerful media operations within easy reach.', visual: 'frame', note: 'INPUT → PROCESS → OUTPUT' },
+  { category: 'OPEN WEB', kana: '収集', line: 'A better place for good finds.', body: 'A curated cabinet of resources, channels and videos. Built to make worthwhile discoveries easier to keep, browse and share.', visual: 'shelf', note: 'FIND → KEEP → RETURN' },
+] as const;
+const detail = details[index];
+---
+<article class={`work-card work-card--${detail.visual}`}>
+  <a class="work-card-link" href={project.href} target="_blank" rel="noreferrer" aria-label={`Explore ${project.title} (opens in a new tab)`}>
+    <div class="work-card-top"><span>PROJECT / {project.index}</span><span>{detail.category}</span></div>
+    <div class="work-art" aria-hidden="true">
+      <div class="work-art-grid"></div>
+      <span class="work-art-kana">{detail.kana}</span>
+      {detail.visual === 'queue' && <div class="queue-diagram"><span>01<br />待機</span><i></i><span>02<br />実行</span><i></i><span>03<br />完了</span></div>}
+      {detail.visual === 'orbit' && <div class="orbit-diagram"><span class="orbit-center">?</span><span class="orbit-dot orbit-dot-a"></span><span class="orbit-dot orbit-dot-b"></span><span class="orbit-dot orbit-dot-c"></span></div>}
+      {detail.visual === 'frame' && <div class="frame-diagram"><span class="frame-one"></span><span class="frame-two"></span><span class="frame-cut">↗</span></div>}
+      {detail.visual === 'shelf' && <div class="shelf-diagram"><span></span><span></span><span></span><span></span><span></span><span></span></div>}
+      <span class="work-art-caption">{detail.note}</span>
+      <span class="work-art-stamp">SG<br />製作</span>
+    </div>
+    <div class="work-card-body">
+      <div class="work-title-line"><h2>{project.title}</h2><span class="work-arrow" aria-hidden="true">↗</span></div>
+      <p class="work-card-line">{detail.line}</p>
+      <p class="work-card-description">{detail.body}</p>
+      <div class="work-card-foot"><span>{project.stack.join(' / ')}</span><span>VIEW PROJECT ↗</span></div>
+    </div>
+  </a>
+</article>
